@@ -44,17 +44,6 @@ endif ()
 
 
 # Define list of undefined symbols that are provided by the PostgreSQL server
-set(POSTGRES_UNDEFINED_SYMBOLS
-  "-Wl,-U,_PostmasterPid"
-  "-Wl,-U,_IsUnderPostmaster"
-  "-Wl,-U,_ExecutorRun_hook"
-  "-Wl,-U,_standard_ExecutorRun"
-  "-Wl,-U,_errfinish"
-  "-Wl,-U,_errmsg_internal"
-  "-Wl,-U,_errstart"
-  "-Wl,-U,_emit_log_hook"
-)
-
 if(UNIX AND NOT APPLE)
     set(POSTGRES_UNDEFINED_SYMBOLS
         "-Wl,--unresolved-symbols,ignore-all"
@@ -62,14 +51,20 @@ if(UNIX AND NOT APPLE)
 else()
     # Define list of undefined symbols that are provided by the PostgreSQL server
     set(POSTGRES_UNDEFINED_SYMBOLS
-        "-Wl,-U,_PostmasterPid"
-        "-Wl,-U,_IsUnderPostmaster"
-        "-Wl,-U,_ExecutorRun_hook"
-        "-Wl,-U,_standard_ExecutorRun"
+        "-Wl,-U,_duckdb_default_db"
+        "-Wl,-U,_emit_log_hook"
         "-Wl,-U,_errfinish"
         "-Wl,-U,_errmsg_internal"
+        "-Wl,-U,_errstart_cold"
         "-Wl,-U,_errstart"
-        "-Wl,-U,_emit_log_hook"
+        "-Wl,-U,_ExecutorRun_hook"
+        "-Wl,-U,_IsUnderPostmaster"
+        "-Wl,-U,_pgduckdb_forward_create_table"
+        "-Wl,-U,_PostmasterPid"
+        "-Wl,-U,_SPI_connect"
+        "-Wl,-U,_SPI_exec"
+        "-Wl,-U,_SPI_finish"
+        "-Wl,-U,_standard_ExecutorRun"
     )
 endif()
 
